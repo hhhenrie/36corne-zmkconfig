@@ -100,17 +100,8 @@ ZMK_BEHAVIOR(mt_end,  hold_tap,  bindings = <&masked_end>, <&kp>; MT_CORE)
     )
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
+\\
 
-/* Caps-word, num-word and smart-mouse */
-
-// tap: sticky-shift | shift + tap/ double-tap: caps-word | hold: shift
-                                                                    ZMK_BEHAVIOR(smart_shft, mod_morph,
-                                                                        bindings = <&sk LSHFT>, <&caps_word>;
-                                                                        mods = <(MOD_LSFT)>;
-                                                                    )
-                                                                    &caps_word {  // mods deactivate caps-word, requires PR #1441
-                                                                        /delete-property/ ignore-modifiers;
-                                                                    };
 
 // tap: num-word | double-tap: sticky num-layer | hold: num-layer
 #define SMART_NUM &smart_num NUM 0
@@ -128,12 +119,6 @@ ZMK_BEHAVIOR(num_dance, tap_dance,
     layers = <NUM>;
 };
 
-// smart-mouse, requires PR #1366
-ZMK_BEHAVIOR(smart_mouse, tri_state,
-    bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
-    ignored-key-positions = <LT1 LT3 RT1 RT2 RT3 RM1 RM2 RM3 RH0 RH1>;
-    ignored-layers = <MOUSE>;
-)
 
 /* Custom behaviors */
 
@@ -193,41 +178,13 @@ ZMK_BEHAVIOR(rpar_gt, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-ZMK_BEHAVIOR(comma_dance, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&mt SEMI COMMA>, <&kp BSLH>;
-)
-ZMK_BEHAVIOR(dot_dance, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&mt COLON DOT>, <&kp EXCL>;
-)
-ZMK_BEHAVIOR(qt_dance, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&mt DQT QMARK>, <&kp SQT>;
-)
-ZMK_BEHAVIOR(hyper_dance, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&mt RS(RC(RA(RGUI))) RS(RC(RA(H)))>, <&kp RS(RC(RA(J)))>;
-)
 
-ZMK_BEHAVIOR(nayeon, macro,
-    wait-ms = <0>;
-    tap-ms = <5>;
-    bindings = <&kp N &kp A &kp Y &kp E &kp O &kp N &kp RET>;
-)
-
-//Windows sleep key
-ZMK_BEHAVIOR(win_sleep, macro,
-    wait-ms = <100>;
-    tap-ms = <5>;
-    bindings = <&kp LG(X) &kp U &kp S>;
-)
 
 // misc aliases
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
 #define DSK_PREV    &hmr RSHFT LG(LC(LEFT))  // previous desktop
 #define DSK_NEXT    &hmr LALT LG(LC(RIGHT))  // next B    desktop
-#define VOL_DOWN    &hmr LCTRL C_VOL_DN
+
 
 /* Keymap */
 
